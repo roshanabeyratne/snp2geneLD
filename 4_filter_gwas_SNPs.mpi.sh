@@ -21,12 +21,12 @@ date
 module load python
 source /ccs/home/abeyratnecr/loadmyconda.sh
 source activate /lustre/orion/syb111/proj-shared/Personal/abeyratnecr/libraries/andes/anaconda3/envs/ORNL_ENV_2
+source ./0_set_parameters_and_io_names.sh # This script has all the required input and output variables not specified in this script
+
 
 # set input variables
 wdir="/lustre/orion/syb111/proj-shared/Personal/abeyratnecr/pennycress/sub_proj/snp2genes_growout1/github_sync"
-trait_list="${wdir}/results/gwas_trait_list.txt" # gwas_trait_list.txt is a one column list with traits separated by "\n" 
-gwas_loc="/lustre/orion/syb111/proj-shared/Personal/hchhetri/projects/pennycress/set423/gapit_runs/variety_notas_CV" # <location of the GWAS out from GAPIT>
-models=("BLINK" "FarmCPU" "MLMM" "MLM") # These are the GAPIT models. Change the list as needed based on what models used
+
 out_dir="${wdir}/results/filtered_snps" # <proposed location for filtered SNPs>
 
 # derived variables
