@@ -1,20 +1,17 @@
 #!/lustre/orion/syb111/proj-shared/Personal/abeyratnecr/libraries/andes/anaconda3/envs/ORNL_ENV_2/bin/R
 ################################################################################
 # Estimate the target distance at which LD reaches a given LD value
-# Uses the Hill & Weir, 1988 equation to model LD
+# Uses the Exponential decay method
 # CRA 041122024
 ################################################################################
 rm(list=ls())
 args=commandArgs(trailingOnly=T)
 snpld_filename<-as.character(args[1])
-n=as.numeric(args[2])
-target_bkg_ld=as.numeric(args[3])
-plot_name=as.character(args[4])
+plot_name=as.character(args[2])
 
 # load tidyverse for binning function
 suppressPackageStartupMessages(library(tidyverse))
 suppressPackageStartupMessages(library(pracma))
-
 
 # reading the pairwise-LD values generated for the focal SNP
 # ld<-read.table(snpld_filename,header=T)
@@ -45,11 +42,9 @@ f_doubleprime <- gradient(f_prime, ld2$distance)
 curvature <- abs(f_doubleprime) / (1 + f_prime^2)^(3/2)
 mid_idx=which.min(abs(mean(curvature) - curvature))
 
-
 distance.span=ld2$distance[mid_idx]
 expected.ld=r2_smooth[mid_idx]
 mod_fit=cor_m$estimate
-
 
 # hill.weir.eq=(R2~(((10+(rho*distance))/((2+(rho*distance))*(11+(rho*distance))))*(1+(((3+(rho*distance))*(12+(12*(rho*distance))+((rho*distance)**2)))/(n*(2+(rho*distance))*(11+(rho*distance)))))))
 # # n=423
@@ -80,8 +75,7 @@ mod_fit=cor_m$estimate
 # cat(focal_snp, ",", distance.span, ",", expected.ld, ",", mod_fit)
 tmp_mat <- matrix(c(distance.span, expected.ld, mod_fit), nrow=1) %>% as.data.frame()
 colnames(tmp_mat) <- c('distance.span', 'expected.ld', 'mod_fit')
-table_name <- snpld_filename %>% str_replace("ld$", '')
-table_name <- paste0(table_name, target_bkg_ld, '.txt')
+table_name <- snpld_filename %>% str_replace("ld$", 'decay')
 write.table(tmp_mat, file=table_name, quote=F, row.names=F)
 
 # plot the LD-decay from marker

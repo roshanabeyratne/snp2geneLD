@@ -2,7 +2,7 @@
 #SBATCH -A SYB111
 #SBATCH -J pw_ld
 #SBATCH -N 1
-#SBATCH -t 4:00:00 
+#SBATCH -t 8:00:00 
 #SBATCH -o ./%x-%j-%a.o
 #SBATCH -e ./%x-%j-%a.e
 
@@ -31,35 +31,45 @@ fi
 intvl_list="${out_pw_ld}/${win_size}_${step_size}.bed" # <bed file with genomic window intervals>
 cat ${intvl_list}| grep -v 'scaffold' > ${intvl_list} # Comment this section out when estimating for scaffolds
 tmp_command_list="${wdir}/command_list_estimate_pw_ld.txt" # <full-path for the output mpi-command-list>
-tmp_bim="${out_pw_ld}/tmp_bim.txt"
 
 # Handling the case when chromosome IDs are mentioned as numbers in the first column of the PLINK.bim file
-foo=$(cat ${plink_prefx}.bim| grep -v 'scaffold' |awk '{print $1}' | sort -g| uniq) # check .bim file contig names
+foo=$(cat ${plink_prefx}.bim| grep -v 'scaffold' |awk '{print $1}' | uniq) # check .bim file contig names
 bar=($foo)
-fooz=$(cat ${intvl_list}| grep -v 'scaffold'| awk '{print $1}' | sort -g| uniq) # check intvl_list contig names
+fooz=$(cat ${intvl_list}| grep -v 'scaffold'| awk '{print $1}' | uniq) # check intvl_list contig names
 barz=($fooz)
 
 if [[ ${bar[0]} =~ ^[0-9]+$ ]] || [[ ${barz[0]} =~ ^[0-9]+$ ]]; then
     for ((i=0;i<${#barz[@]};i++))
         do 
-            j=$(echo $i+1| bc)
-            printf "%s\t%s\n" "$j" "${barz[$i]}"
-        done > ${tmp_bim}
+            # j=$(echo $i+1| bc) # This does not work when when the sequence goes like [ Chr01K, Chr02k, ... Chr01N, Chr02N ]
+            printf "%s\t%s\n" "${bar[$i]}" "${barz[$i]}"
+        done > ${out_pw_ld}/tmp_bim.txt
 fi
 
 if [[ ${bar[0]} =~ ^[0-9]+$ ]]; then
     # create mpi-command-list
-    for i in $(seq 1 $(wc -l < ${intvl_list}))
+    for i in $(seq 1 $(wc -l < ${intvl_list})) 
     # $(wc -l < ${intvl_list})
     do 
         line="$(sed -n ${i}p ${intvl_list})"
         chr="$(echo ${line} | awk '{print $1}')"
         start="$(echo ${line} |awk '{print $2}')"
         end="$(echo ${line} |awk '{print $3}')"
-        chr_num=$(awk -v key="$chr" '$2 == key {print $1}' "$tmp_bim")
+        chr_num=$(awk -v key="$chr" '$2 == key {print $1}' "${out_pw_ld}/tmp_bim.txt")
         # echo "${chr} ${start} ${end} ${chr_num}"
         out="${out_pw_ld}/${chr}_${start}_${end}"
-        echo "plink --bfile ${plink_prefx} --allow-extra-chr --chr-set ${#bar[@]} --chr ${chr_num} --r2 --from-bp ${start} --to-bp ${end} --ld-window ${max_adj_mrkrs} --ld-window-r2 0 --out ${out}"
+        echo "plink --bfile ${plink_prefx} \
+        --allow-extra-chr \
+        --chr-set ${#bar[@]} \
+        --chr ${chr_num} \
+        --r2 \
+        --from-bp ${start} \
+        --to-bp ${end} \
+        --ld-window ${max_adj_mrkrs} \
+        --ld-window-r2 0 \
+        --freq \
+        --hardy \
+        --out ${out}"
     done > ${tmp_command_list}
 
 else
@@ -72,7 +82,17 @@ else
         start="$(echo ${line} |awk '{print $2}')"
         end="$(echo ${line} |awk '{print $3}')"
         out="${out_pw_ld}/${chr}_${start}_${end}"
-        echo "plink --bfile ${plink_prefx} --allow-extra-chr --chr ${chr} --r2 --from-bp ${start} --to-bp ${end} --ld-window ${max_adj_mrkrs} --ld-window-r2 0 --out ${out}"
+        echo "plink --bfile ${plink_prefx} \
+        --allow-extra-chr \
+        --chr ${chr} \
+        --r2 \
+        --from-bp ${start} \
+        --to-bp ${end} \
+        --ld-window ${max_adj_mrkrs} \
+        --ld-window-r2 0 \
+        --freq \
+        --hardy \
+        --out ${out}"
     done > ${tmp_command_list}
 fi
 

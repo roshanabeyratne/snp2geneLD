@@ -25,13 +25,13 @@ source ./0_set_parameters_and_io_names.sh # This script has all the required inp
 
 # set input variables
 intvl_list="${out_pw_ld}/${win_size}_${step_size}.bed" # <bed file with genomic window intervals>
-n=$(wc -l < ${plink_prefx}.fam) # Number of samples with genotype data used for LD estimation
+# n=$(wc -l < ${plink_prefx}.fam) # Number of samples with genotype data used for LD estimation
 tmp_command_list="${wdir}/command_list_estimate_ld_decay.txt" # <full-path for the output mpi-command-list>
 
 if [ ! -d "${out_pw_ld}/plots" ]; then
     echo "Directory < ${out_pw_ld}/plots > does not exist! Creating it now..."
     mkdir -p "${out_pw_ld}/plots"  # -p ensures no error if parent directories are missing
-    echo "Directory < ${out_pw_ld}plots > created."
+    echo "Directory < ${out_pw_ld}/plots > created."
 else
     echo "Directory < ${out_pw_ld}/plots > already exists."
 fi
@@ -56,5 +56,6 @@ srun -n4 -N1 python ${wdir}/helper_scripts/pyscript.py -c ${tmp_command_list}
 conda deactivate
 rm ${tmp_command_list}
 
-date 
+date
+
 #==============================================================================
