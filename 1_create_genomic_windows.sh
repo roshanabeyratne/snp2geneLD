@@ -2,8 +2,8 @@
 
 # title          :1_create_genomic_windows.sh
 # description    :Creates user defined genomic-window coordinates for a reference genome in FASTA format
-# author         :CRA
-# date           :12022025
+# author         :RoshanAbeyratne & HariChhetri
+# date           :20022025
 # usage          :bash ./1_create_genomic_windows.sh
 # notes          :Requires samtools and bedtools
 #==============================================================================
@@ -28,5 +28,5 @@ conda deactivate
 date
 
 # NOTE:
-# The output file name will be formatted as ${out_put_folder}/${win_size}_${step_size}.bed
+# The output file name will be formatted as ${out_pw_ld}/${win_size}_${step_size}.bed
 #==============================================================================
