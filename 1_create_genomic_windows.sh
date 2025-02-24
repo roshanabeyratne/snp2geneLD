@@ -1,28 +1,32 @@
 #!/bin/bash
 
-# title          :genomic_window_coordinates_using_reference.sh
+# title          :1_create_genomic_windows.sh
 # description    :Creates user defined genomic-window coordinates for a reference genome in FASTA format
-# author         :CRA
-# date           :19022024
-# usage          :bash ./genomic_window_coordinates_using_reference.sh -i <ref_genome> -w <win_size> -s <step_size> -o <out_put_folder>
+# author         :RoshanAbeyratne & HariChhetri
+# date           :20022025
+# usage          :bash ./1_create_genomic_windows.sh
 # notes          :Requires samtools and bedtools
 #==============================================================================
 
 date 
 
-source activate /lustre/orion/syb111/proj-shared/Personal/abeyratnecr/libraries/andes/anaconda3/envs/popgen # contains samtools and bedtools
+source activate /lustre/orion/syb111/proj-shared/Personal/abeyratnecr/libraries/andes/anaconda3/envs/popgen # environment contains samtools and bedtools
+source ./0_set_parameters_and_io_names.sh # This script has all the required input and output variables not specified in this script
 
-ref_genome="/lustre/orion/syb111/proj-shared/Personal/abeyratnecr/pennycress/data/reference.fasta" # <ref_genome with full-path>
-win_size=5000000 # <win_size>
-step_size=$((${win_size}/2))
-out_put_folder="/lustre/orion/syb111/proj-shared/Personal/abeyratnecr/pennycress/sub_proj/snp2genes_growout1/github_sync/results/" # <out_put_folder full-path>
+if [ ! -d "${out_pw_ld}" ]; then
+    echo "Directory < ${out_pw_ld} > does not exist! Creating it now..."
+    mkdir -p "${out_pw_ld}"  # -p ensures no error if parent directories are missing
+    echo "Directory < ${out_pw_ld} > created."
+else
+    echo "Directory < ${out_pw_ld} > already exists."
+fi
 
-bash ./helper_scripts/genomic_window_coordinates_using_reference.sh -i ${ref_genome} -w ${win_size} -s ${step_size} -o ${out_put_folder}
+bash ${wdir}/helper_scripts/genomic_window_coordinates_using_reference.sh -i ${ref_genome} -w ${win_size} -s ${step_size} -o ${out_pw_ld}
 
 conda deactivate
 
 date
 
 # NOTE:
-# The output file name will be formatted as ${out_put_folder}/${win_size}_${step_size}.bed
+# The output file name will be formatted as ${out_pw_ld}/${win_size}_${step_size}.bed
 #==============================================================================

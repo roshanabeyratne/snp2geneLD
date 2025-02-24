@@ -1,3 +1,12 @@
+pw_ld/
+gw_ld/
+fsnps/
+s2g/
 results/
-plots/
-Untitled.ipynb
+Untitled*.ipynb
+*.txt
+*.csv
+*.xlsx
+*.e
+*.o
+
