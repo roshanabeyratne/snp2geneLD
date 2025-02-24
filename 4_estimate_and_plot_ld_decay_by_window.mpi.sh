@@ -54,7 +54,7 @@ done > ${tmp_command_list}
 srun -n4 -N1 python ${wdir}/helper_scripts/pyscript.py -c ${tmp_command_list}
 
 conda deactivate
-rm ${tmp_command_list}
+# rm ${tmp_command_list}
 
 date
 #==============================================================================
