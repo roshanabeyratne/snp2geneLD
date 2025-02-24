@@ -11,3 +11,6 @@ SNP lists are the output of running GAPIT GWAS pipeline on phenotypes
 * Chanaka Roshan Abeyratne (CRA)
 * Hari Chhetri (HBC)
 
+## Project description
+![Summary of the project](repo_images/chrom_scale_LD.png)
+![LD modelling at the genomic window scale](repo_images/genomic_window_LD_modelling.png)
