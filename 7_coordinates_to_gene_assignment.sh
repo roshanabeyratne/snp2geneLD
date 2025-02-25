@@ -17,7 +17,7 @@ source ./0_set_parameters_and_io_names.sh # This script has all the required inp
 
 # make snptogene output folder if it does not exist
 if [ ! -d "${s2g}" ]; then
-    echo "Directory < ${out_pw_ld} > does not exist! Creating it now..."
+    echo "Directory < ${s2g} > does not exist! Creating it now..."
     mkdir -p "${s2g}"  # -p ensures no error if parent directories are missing
     echo "Directory < ${s2g} > created."
 else

@@ -38,7 +38,7 @@ else
 fi
 
 # create mpi-command-list
-# missing_runs=( 2087 2088 ) # Use this and the following lines in order to rerun missing runs
+# missing_runs=( 249 450 ) # Use this and the following lines in order to rerun missing runs
 # for i in "${missing_runs[@]}"
 for i in $(seq 1 $(wc -l < ${intvl_list}))
 do 
