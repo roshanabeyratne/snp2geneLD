@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# title          :1_create_genomic_windows.sh
+# title          :2_create_genomic_windows.sh
 # description    :Creates user defined genomic-window coordinates for a reference genome in FASTA format
 # author         :RoshanAbeyratne & HariChhetri
 # date           :20022025
-# usage          :bash ./1_create_genomic_windows.sh
+# usage          :bash ./2_create_genomic_windows.sh
 # notes          :Requires samtools and bedtools
 #==============================================================================
 

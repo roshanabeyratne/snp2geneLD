@@ -8,11 +8,11 @@
 #SBATCH -e ./%x-%j-%a.e
 
 #==============================================================================
-# title          :2_estimate_gw_ld_by_window_mpi.sh
+# title          :3_estimate_gw_ld_by_window_mpi.sh
 # description    :Estimates pairwise LD (r2) for SNPs within a genomic window
 # author         :RoshanAbeyratne & HariChhetri
 # date           :20022025
-# usage          :sbatch 12_estimate_gw_ld_by_window.mpi.sh
+# usage          :sbatch 3_estimate_gw_ld_by_window.mpi.sh
 # notes          :Requires an environment with samtools, bedtools and MPI implementation.
 #==============================================================================
 
