@@ -11,7 +11,7 @@
 date 
 
 source activate /lustre/orion/syb111/proj-shared/Personal/abeyratnecr/libraries/andes/anaconda3/envs/popgen # environment contains samtools and bedtools
-source ./0_set_parameters_and_io_names.sh # This script has all the required input and output variables not specified in this script
+source ./1_set_parameters_and_io_names.sh # This script has all the required input and output variables not specified in this script
 
 if [ ! -d "${out_pw_ld}" ]; then
     echo "Directory < ${out_pw_ld} > does not exist! Creating it now..."

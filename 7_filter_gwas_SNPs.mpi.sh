@@ -21,7 +21,7 @@ date
 module load python
 source /ccs/home/abeyratnecr/loadmyconda.sh
 source activate /lustre/orion/syb111/proj-shared/Personal/abeyratnecr/libraries/andes/anaconda3/envs/ORNL_ENV_2
-source ./0_set_parameters_and_io_names.sh # This script has all the required input and output variables not specified in this script
+source ./1_set_parameters_and_io_names.sh # This script has all the required input and output variables not specified in this script
 
 # set input variables
 wdir="/lustre/orion/syb111/proj-shared/Personal/abeyratnecr/pennycress/sub_proj/snp2genes_growout1/github_sync"

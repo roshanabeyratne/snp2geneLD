@@ -21,7 +21,7 @@ date
 # activate the conda env with bedtools and plink
 module load python
 source activate /lustre/orion/syb111/proj-shared/Personal/abeyratnecr/libraries/andes/anaconda3/envs/popgen # environment with bedtools, samtools and MPI
-source ./0_set_parameters_and_io_names.sh # This script has all the required input and output variables not specified in this script
+source ./1_set_parameters_and_io_names.sh # This script has all the required input and output variables not specified in this script
 
 # Check if all PLINK inputs exist
 if [ ! -f  "${plink_prefx}.bim" ] || [ ! -f "${plink_prefx}.bed" ] || [ ! -f "${plink_prefx}.fam" ]; then
