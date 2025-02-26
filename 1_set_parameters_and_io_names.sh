@@ -33,4 +33,6 @@ out_pw_ld="${wdir}/pw_ld" # <out_put_folder for pairwise LD estimation full-path
 out_gw_ld="${wdir}/gw_ld" # <out_put_folder for pairwise LD estimation full-path> with low number of adjacent markers to estimate LD trends genomewide
 fsnps="${wdir}/fsnps" # <filtered GWAS SNPs based on a threshold that was provided>
 s2g="${wdir}/s2g" # <out_put_folder for snp-to-gene assignments full-path>
+
+closest_gene_snp_list="${s2g}/gwas_hits_for_closest_gene_reformt.csv" # only change if you are just running 11_ script
 #==============================================================================
