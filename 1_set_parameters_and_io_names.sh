@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# title          :0_set_parameters_and_io_names.sh
+# title          :1_set_parameters_and_io_names.sh
 # description    :Define variables and set parmeters for the pipeline
 # author         :RoshanAbeyratne & HariChhetri
 # date           :20022025

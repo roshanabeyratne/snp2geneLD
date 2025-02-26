@@ -8,11 +8,11 @@
 #SBATCH -e ./%x-%j-%a.e
 
 #==============================================================================
-# title          :4_estimate_and_plot_ld_decay_by_window_mpi.sh
+# title          :6_estimate_and_plot_ld_decay_by_window_mpi.sh
 # description    :Estimate the target distance at which LD reaches a given LD value. Uses the Hill & Weir, 1988 equation to model LD
 # author         :RoshanAbeyratne & HariChhetri
 # date           :20022025
-# usage          :sbatch 4_estimate_and_plot_ld_decay_by_window_mpi.sh
+# usage          :sbatch 6_estimate_and_plot_ld_decay_by_window_mpi.sh
 # notes          :Requires an R-environment with tidyverse and NLS.
 #==============================================================================
 

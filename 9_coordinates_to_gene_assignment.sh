@@ -1,11 +1,11 @@
 #!/bin/bash
 
 #==============================================================================
-# title          :7_coordinates_to_gene_assignment.sh
+# title          :9_coordinates_to_gene_assignment.sh
 # description    :Creates user defined genomic-window coordinates for a reference genome in FASTA format
 # author         :RoshanAbeyratne & HariChhetri
 # date           :19022024
-# usage          :bash 7_coordinates_to_gene_assignment.sh
+# usage          :bash 9_coordinates_to_gene_assignment.sh
 # notes          :Requires an environment with bedtools & set input variable <wdir>, <query_intvls>, <gff_fn>
 #==============================================================================
 

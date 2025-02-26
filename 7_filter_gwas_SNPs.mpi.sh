@@ -7,11 +7,11 @@
 #SBATCH -e ./%x-%j-%a.e
 
 #==============================================================================
-# title          :5_filter_gwas_SNPs.mpi.sh
+# title          :7_filter_gwas_SNPs.mpi.sh
 # description    :Obtain a filtered list of GWAS SNPs for all GAPIT models based on a threshold.
 # author         :RoshanAbeyratne & HariChhetri
 # date           :21022025
-# usage          :sbatch  5_filter_gwas_SNPs.mpi.sh
+# usage          :sbatch  7_filter_gwas_SNPs.mpi.sh
 # notes          :Requires env with MPI
 #==============================================================================
 
